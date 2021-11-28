@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="checkbox" class="AllChecked" value="全选">全选/全不选
+    <input type="checkbox" class="Checked" value="足球">足球
+    <input type="checkbox" class="Checked" value="篮球">篮球
+    <input type="checkbox" class="Checked" value="乒乓球">乒乓球
+    <input type="checkbox" class="Checked" value="排球">排球
+    <button class="btnchecked">全选</button>
+    <button class="unchecked">全不选</button>
+    <button class="inverse">反选</button>
+</body>
+<script>
+    window.onload = function () {
+        var checkbox = document.querySelectorAll('.Checked')
+        var AllChecked = document.querySelector('.AllChecked')
+        var btnchecked = document.querySelector('.btnchecked')
+        var btnunchecked = document.querySelector('.unchecked')
+        var inverse = document.querySelector('.inverse')
+        AllChecked.onclick = function () {
+            for (let i = 0; i < checkbox.length; i++) {
+                if (AllChecked.checked) {
+                    checkbox[i].checked = true
+                } else {
+                    checkbox[i].checked = false
+                }
+            }
+        }
+        btnchecked.onclick = function () {
+            for (let i = 0; i < checkbox.length; i++)
+                checkbox[i].checked = true
+            AllChecked.checked = true
+        }
+        btnunchecked.onclick = function () {
+            for (let i = 0; i < checkbox.length; i++)
+                checkbox[i].checked = false
+            AllChecked.checked = false
+        }
+        for (let i = 0; i < checkbox.length; i++) {
+            checkbox[i].onclick = function () {
+                AllChecked.checked = true
+                for (let j = 0; j < checkbox.length; j++) {
+                    if (!checkbox[j].checked) {
+                        AllChecked.checked = false
+                    }
+                }
+
+            }
+        }
+        inverse.onclick = function () {
+            for (let i = 0; i < checkbox.length; i++) {
+                if (checkbox[i].checked) {
+                    checkbox[i].checked = false
+                } else {
+                    checkbox[i].checked = true
+                }
+                AllChecked.checked = !AllChecked.checked
+                AllChecked.checked = true
+                for (let j = 0; j < checkbox.length; j++) {
+                    if (!checkbox[j].checked) {
+                        AllChecked.checked = false
+                    }
+
+                }
+
+
+            }
+        }
+    }
+
+</script>
+
+</html>
