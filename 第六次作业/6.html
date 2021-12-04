@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>666</title>
+    <style>
+        .ball {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 5px;
+            border-radius: 20px;
+        }
+
+        
+        .ball1 {
+            background: pink;
+        }
+
+        .ball2 {
+            background: rgb(132, 231, 132);
+        }
+
+        .ball3 {
+            background: rgb(221, 184, 115);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ball ball1" style="margin-left: 0"></div>
+    <div class="ball ball2" style="margin-left: 0"></div>
+    <div class="ball ball3" style="margin-left: 0"></div>
+
+
+    <script>
+        var ball1 = document.querySelector(".ball1");      //获取元素位置
+        var ball2 = document.querySelector(".ball2");
+        var ball3 = document.querySelector(".ball3");
+
+        function promiseAnimate(ball, left) {
+            return new Promise(function (resolve, reject) {
+
+                function animate(ball, left) {         //将动画效果建立函数 两个参数是对象、位置
+                    setTimeout(function () {
+                        var marginLeft = parseInt(ball.style.marginLeft, 10);    //element.style.left
+                        if (marginLeft === left) {
+                            resolve();
+                        } else {
+                            if (marginLeft < left) {
+                                marginLeft ++;
+                            } else {
+                                marginLeft --;
+                            }
+                            ball.style.marginLeft = marginLeft + "px";
+                            animate(ball, left);
+                        }
+                    }, 5.2);
+                }
+                animate(ball, left);
+            });
+        }
+        promiseAnimate(ball1, 200)
+            .then(function () {
+                return promiseAnimate(ball2, 200);
+            })
+            .then(function () {
+                return promiseAnimate(ball3, 200);
+            })
+            .then(function () {
+                return promiseAnimate(ball1, 0);
+            })
+            .then(function () {
+                return promiseAnimate(ball2, 0);
+            })
+            .then(function () {
+                return promiseAnimate(ball3, 0);
+            })
+
+
+    </script>
+</body>
+
+</html>
